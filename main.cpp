@@ -1,5 +1,11 @@
 #include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream> // For stringstream
 using namespace std;
+
+// Forward Declarations
+void registration();
 
 int main()
 {
@@ -34,7 +40,7 @@ int main()
             break;
         case 2:
             system("cls");
-            // registration();
+            registration();
             break;
         case 3:
             system("cls");
@@ -54,4 +60,36 @@ int main()
         }
     }
     return 0;
+}
+
+void registration()
+{
+    string userId, userPassword, userEmail, securityQuestion, securityAnswer;
+
+    cout << "__________________________________________________________________\n";
+    cout << "|                       Registration Page                         |\n";
+    cout << "|_________________________________________________________________|\n\n";
+
+    // Collect user information
+    cout << "\t\t Enter your username: ";
+    cin.ignore(); // Clear buffer before getline
+    getline(cin, userId);
+    cout << "\t\t Enter your password: ";
+    getline(cin, userPassword);
+    cout << "\t\t Enter your email: ";
+    getline(cin, userEmail);
+    cout << "\t\t Enter a security question (e.g., Your pet's name?): ";
+    getline(cin, securityQuestion);
+    cout << "\t\t Enter the answer to your security question: ";
+    getline(cin, securityAnswer);
+
+    // Store user data in a file with '|' as a delimiter
+    ofstream credentialWrite("credentials.txt", ios::app); // Append mode
+    credentialWrite << userId << '|' << userPassword << '|' << userEmail << '|' << securityQuestion << '|' << securityAnswer << endl;
+    credentialWrite.close(); // Close the file
+
+    system("cls");
+    cout << "|******************************************************************|\n";
+    cout << "|                  Registration is successful!                     |\n";
+    cout << "|******************************************************************|\n\n";
 }
